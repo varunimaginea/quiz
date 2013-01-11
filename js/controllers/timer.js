@@ -1,7 +1,7 @@
 /**************************
  * Timer Controller
  **************************/
-(function (QuizApp) {
+(function (Quiz) {
 	'use strict';
 
 	var TimerController = Ember.Controller.extend({
@@ -9,7 +9,7 @@
         updateTimer: null,
 
 		initialize: function (time) {
-            this.set('timer', QuizApp.Timer.create({'totalTime': time, 'timeLeft': time}));
+            this.set('timer', Quiz.Timer.create({'totalTime': time, 'timeLeft': time}));
         },
 
         startTimer: function () {
@@ -18,7 +18,7 @@
                 if (that.get('timer').get('timeLeft') > 0) {
                     that.get('timer').set('timeLeft', that.get('timer').get('timeLeft') - 1);
                 } else {
-                    QuizApp.QuizController.quit();
+                    Quiz.QuizController.quit();
                 }
             }, 1000));
         },
@@ -27,7 +27,7 @@
         }
 	});
 
-	QuizApp.TimerController = TimerController;
-	QuizApp.timerController = TimerController.create();
+	Quiz.TimerController = TimerController;
+	Quiz.timerController = TimerController.create();
 
-})(window.QuizApp);
+})(window.Quiz);

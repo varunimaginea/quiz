@@ -1,7 +1,7 @@
 /**************************
  * Timer Model
  **************************/
-(function (QuizApp) {
+(function (Quiz) {
 	'use strict';
 
 	var Timer = Ember.Object.extend({
@@ -13,6 +13,6 @@
             }
         });
 
-    QuizApp.Timer = Timer;
+    Quiz.Timer = Timer;
 
-})(window.QuizApp);
+})(window.Quiz);

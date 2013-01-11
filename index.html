@@ -8,16 +8,52 @@
         <meta name="viewport" content="width=device-width">
 
         <link rel="stylesheet" href="css/normalize.min.css">
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/quiz.css">
 
     </head>
-    <body>	
-	    <section id="quizApp"></section>
+    <body>
+	    <section id="quizApp">
+            <!-- script type="text/x-handlebars"-->
+                <header></header>
+                <section id="loginSection">
+                    <label for="userName" class="user-detail-label">Enter your name</label>
+                    <input type="text" id="userName"/>
+                </section>
+                <section id="controlSection">
+                    <button id="start-quiz-button" class="navBtn" {{action "startGame" on="click"}}>Start</button>
+                    <button id="help-button" class="navBtn">Help</button>
+                </section>
+            <!--/script-->
+            <script type="text/x-handlebars" data-template-name="question-view">
+                {{#if view.content.isFillIn}}
+                <img {{bindAttr src="view.content.imageURL" }} />
+                <p class="questionText">{{view.content.question}}</p>
+                {{view App.FieldView contentBinding="view.content"}}
+                {{else}}
+                <p class="questionText">{{view.content.question}}</p>
+                {{#collection contentBinding="view.content.options" class="questionOptions" tagName="ul"}}
+                {{view App.RadioView contentBinding="view.content"}}
+                {{/collection}}
+                {{/if}}
+            </script>
+	    </section>
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <!-- Load google Api jquery first for better performance since it is cached. -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/lib/jquery-1.7.2.min"><\/script>')</script>
-
+        <script src="js/lib/ember-0.9.8.1.js"></script>
         <script src="js/main.js"></script>
+        <!-- Models -->
+        <script src="js/models/answer.js"></script>
+        <script src="js/models/question.js"></script>
+        <script src="js/models/timer.js"></script>
+        <!-- Views -->
+        <script src="js/views/timer.js"></script>
+        <script src="js/views/quiz.js"></script>
+        <!-- Controllers -->
+        <script src="js/controllers/timer.js"></script>
+        <script src="js/controllers/quiz.js"></script>
+
     </body>
 </html>
 

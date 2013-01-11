@@ -1,14 +1,12 @@
 /**************************
  * Answer Model
  **************************/
-(function (QuizApp) {
+(function (Quiz) {
 	'use strict';
 
 	var Answer = Ember.Object.extend({
             answer: null,
             type: null
         });
-		
-    QuizApp.Answer = Answer;
-
-})(window.QuizApp);
+    Quiz.Answer = Answer;
+})(window.Quiz);

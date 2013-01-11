@@ -1,7 +1,7 @@
 /**************************
  * Question Model
  **************************/
-(function (QuizApp) {
+(function (Quiz) {
 	'use strict';
 
 	var Question = Ember.Object.extend({
@@ -15,7 +15,7 @@
                 return Ember.isEqual(this.get('type'), "fillin");
             }.property('type')
         });
-		
-    QuizApp.Question = Question;
 
-})(window.QuizApp);
+    Quiz.Question = Question;
+
+})(window.Quiz);
