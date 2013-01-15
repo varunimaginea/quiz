@@ -1,13 +1,10 @@
-(function (window) {
+(function (window, $) {
 	'use strict';
 
-	window.Quiz = Ember.Application.create({
-		VERSION: '1.0',
-		rootElement: '#quizApp',
-		ready: function () {
-			this.initialize();
-		}
-	});
+    window.Quiz = Ember.Application.create({
+        VERSION: '1.0',
+        rootElement: '#quizApp'
+    });
 
     window.Quiz.questions = {
         title: "IQ Tester",
@@ -82,5 +79,5 @@
         randomized: true //If true, the questions will be displayed in random.
     };
 
-})(window);
+})(window, jQuery);
 

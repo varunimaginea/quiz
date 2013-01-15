@@ -9,17 +9,18 @@
     'use strict';
     Quiz.QuizView = Ember.View.extend({
         templateName: 'quiz-view',
+        contentBinding: null,
         controller: null,
         /*Timer View Definition*/
-        timerView: Quiz.TimerView.create({controller: this.controller}),
+        timerView: null,
         /*Question View Definition*/
         questionView: Ember.View.create({
-            contentBinding: this.parentView.get('controller').content,
+/*
             answerTextField: Ember.TextField.create({
                 keyUp: function (event) {
                     this.parentView.controller.set('currentAnswer', this.get('value'));
                 }
-            }),
+            }),*/
             optionsView: Ember.View.create({
                 tagName: 'a',
                 template: Ember.Handlebars.compile('{{view.content}}'),

@@ -1,0 +1,9 @@
+<header></header>
+<section id="loginSection">
+    <label for="userName" class="user-detail-label">Enter your name</label>
+    {{view Quiz.HomeView.userNameField}}
+</section>
+<section id="controlSection">
+    {{view Quiz.HomeView.startButtonView target="Quiz.quizController" action="startQuiz"}}
+    <button id="help-button" class="navBtn">Help</button>
+</section>

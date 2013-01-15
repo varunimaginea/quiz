@@ -58,7 +58,7 @@
     });
 
     Quiz.QuizController = QuizController;
-    /*Quiz.quizController = QuizController.create();
-    Quiz.quizView = Quiz.QuizView.create({controller: Quiz.quizController});*/
+    Quiz.quizController = QuizController.create();
+    Quiz.quizView = Quiz.QuizView.create({controller: Quiz.quizController, timerView: Quiz.TimerView.create({controller: Quiz.quizController}), content: Quiz.quizController.content});
 
 })(window.Quiz, jQuery);

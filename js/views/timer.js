@@ -7,9 +7,7 @@
         width: 104,
         height: 114,
         controller: null,
-        initialize: function (controller) {
-            this.set('controller', controller);
-        },
+
         updateTimerCanvas: function () {
             if (this.get('element').getContext) {
                 var ctx = this.get('element').getContext('2d');
