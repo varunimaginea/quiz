@@ -3,8 +3,23 @@
 
     window.Quiz = Ember.Application.create({
         VERSION: '1.0',
-        rootElement: '#quizApp'
+        rootElement: '#quizApp',
+		ApplicationView: Ember.View.extend(),
+		ApplicationController: Ember.Controller.extend()
     });
+
+	/*window.Quiz.Router = Ember.Router.extend({
+        root: Ember.Route.extend({
+            index: Ember.Route.extend({
+                route: '/'
+            })
+        })
+	});*/
+	
+	//window.Quiz.quizRouter = window.Quiz.Router.create();
+	//window.Quiz.initialize(window.Quiz.quizRouter);
+	
+	window.Quiz.initialize();
 
     window.Quiz.questions = {
         title: "IQ Tester",

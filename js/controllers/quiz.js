@@ -26,8 +26,14 @@
         },
         startQuiz: function () {
             //App.get('router').transitionTo('root.quiz');
+			console.log("started");
             this.set('currentIndex', 0);
-            this.set('timerController', Quiz.timerController.create(Quiz.questions.time));
+            this.set('timerController', Quiz.TimerController.create({
+			    "timer" : Quiz.Timer.create({
+				    'totalTime': Quiz.questions.time, 
+					'timeLeft': Quiz.questions.time
+			    })
+		    }));
         },
         next: function () {
             var currentQuestion = this.get('currentQuestion');

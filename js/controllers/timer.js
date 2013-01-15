@@ -8,10 +8,6 @@
         timer: null,
         updateTimer: null,
 
-		initialize: function (time) {
-            this.set('timer', Quiz.Timer.create({'totalTime': time, 'timeLeft': time}));
-        },
-
         startTimer: function () {
             var that = this;
             that.set("updateTimer", window.setInterval(function () {
@@ -28,6 +24,5 @@
 	});
 
 	Quiz.TimerController = TimerController;
-	Quiz.timerController = TimerController.create();
 
 })(window.Quiz);

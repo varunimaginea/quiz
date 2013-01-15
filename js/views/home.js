@@ -14,29 +14,38 @@
  */
 (function (Quiz) {
     'use strict';
-    /*Quiz.HomeView = Ember.View.extend({
-        template: Ember.Handlebars.compile('<header></header><section id="loginSection"><label for="userName" class="user-detail-label">Enter your name</label>{{view Quiz.HomeView.userNameField}}    </section>        <section id="controlSection">    {{view Quiz.HomeView.startButtonView target="Quiz.quizController" action="startQuiz"}}            <button id="help-button" class="navBtn">Help</button>        </section>'),
-
-
-        userNameField: Ember.TextField.create({
+    Quiz.HomeView = Ember.View.extend({
+        //template: Ember.Handlebars.compile('<header></header><section id="loginSection"><label for="userName" class="user-detail-label">Enter your name</label>{{view view.userNameField}}    </section>        <section id="controlSection">    {{view view.startButtonView target="Quiz.quizController" action="startQuiz"}}            <button id="help-button" class="navBtn">Help</button>        </section>'),
+        //templateName: "homeView",
+		userName: "",
+		init: function () {
+            this._super();
+           // this.set('context', this);
+        },
+		userNameField: Ember.TextField.extend({
             elementId: 'userName'
         }),
 
-        startButtonView: Ember.View.create({
+        startButtonView: Ember.View.extend({
             tagName: 'button',
-            template: 'Start',
+            template: Ember.Handlebars.compile('Start'),
             classNames: ['navBtn'],
             elementId: 'start-quiz-button',
-            validUserName: function () {
-                if (this.parentView) {
-                    return this.userNameField.value;
-                }
-                return false;
-            }.property('userNameField'),
-            disabledBinding: 'validUserName'
+            attributeBindings:['disabled'] ,
+			disabled: function () {
+                 return !(this._parentView.userName.length > 0);
+            }.property('this._parentView.userName'),
+			click: function (e) {
+			     Quiz.quizController.startQuiz();
+			}
         })
-    });*/
-    Quiz.AView = Ember.View.extend({
-        templateName: 'some-template'
     });
+	
+	/*Quiz.AppView = Ember.View.extend({
+	    templateName: "application",
+		init: function () {
+            this._super();
+            this.set('context', this);
+        }
+	});*/
 })(window.Quiz);
