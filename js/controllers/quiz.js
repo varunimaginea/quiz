@@ -6,8 +6,9 @@
 
     var QuizController = Ember.ArrayController.extend({
         content: [],
-        currentIndex: 0,
+        currentIndex: null,
         correctAnswersCount: 0,
+        currentPage: 'home-page',
         score: 0,
         timerController: null,
         currentQuestion: function () {
@@ -27,13 +28,18 @@
         startQuiz: function () {
             //App.get('router').transitionTo('root.quiz');
 			console.log("started");
-            this.set('currentIndex', 0);
-            this.set('timerController', Quiz.TimerController.create({
-			    "timer" : Quiz.Timer.create({
-				    'totalTime': Quiz.questions.time, 
-					'timeLeft': Quiz.questions.time
-			    })
-		    }));
+            this.setProperties({
+                'currentIndex': 0,
+                'currentPage': 'question-page',
+                '[]': Quiz.questions.questions,
+                'timerController': Quiz.TimerController.create({
+                    'timer' : Quiz.Timer.create({
+                        'totalTime': Quiz.questions.time,
+                        'timeLeft': Quiz.questions.time
+                    })
+                })
+            });
+            Quiz.quizView.appendTo("#qn");
         },
         next: function () {
             var currentQuestion = this.get('currentQuestion');
@@ -65,6 +71,6 @@
 
     Quiz.QuizController = QuizController;
     Quiz.quizController = QuizController.create();
-    Quiz.quizView = Quiz.QuizView.create({controller: Quiz.quizController, timerView: Quiz.TimerView.create({controller: Quiz.quizController}), content: Quiz.quizController.content});
+    Quiz.quizView = Quiz.QuizView.create({controller: Quiz.quizController, timerView: Quiz.TimerView.create({controller: Quiz.quizController})});
 
 })(window.Quiz, jQuery);

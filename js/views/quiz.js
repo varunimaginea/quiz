@@ -9,19 +9,20 @@
     'use strict';
     Quiz.QuizView = Ember.View.extend({
         templateName: 'quiz-view',
-        contentBinding: null,
+        isVisible: function () {
+            return Quiz.quizController.get("currentPage") === "question-page";
+        }.property('Quiz.quizController.currentPage'),
         controller: null,
         /*Timer View Definition*/
         timerView: null,
         /*Question View Definition*/
-        questionView: Ember.View.create({
-/*
-            answerTextField: Ember.TextField.create({
+        questionView: Ember.View.extend({
+            answerTextField: Ember.TextField.extend({
                 keyUp: function (event) {
                     this.parentView.controller.set('currentAnswer', this.get('value'));
                 }
-            }),*/
-            optionsView: Ember.View.create({
+            }),
+            optionsView: Ember.View.extend({
                 tagName: 'a',
                 template: Ember.Handlebars.compile('{{view.content}}'),
                 classNameBindings: ['selected'],
