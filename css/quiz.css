@@ -71,3 +71,10 @@ button[disabled]{
     background: none repeat scroll 0 0 rgba(84, 84, 84, 0.85);
    cursor: not-allowed;
 }
+
+div.timerDisplay{
+  background: url("../img/timer_start_modified.png") no-repeat scroll 0 0 transparent;
+  width: 104px;
+  height: 114px;
+  margin: 10px auto 0;
+}

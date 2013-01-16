@@ -13,8 +13,6 @@
             return Quiz.quizController.get("currentPage") === "question-page";
         }.property('Quiz.quizController.currentPage'),
         controller: null,
-        /*Timer View Definition*/
-        timerView: null,
         /*Question View Definition*/
         questionView: Ember.View.extend({
             AnswerTextField: Ember.TextField.extend({

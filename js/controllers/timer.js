@@ -14,11 +14,12 @@
                 if (that.get('timer').get('timeLeft') > 0) {
                     that.get('timer').set('timeLeft', that.get('timer').get('timeLeft') - 1);
                 } else {
-                    Quiz.QuizController.quit();
+                    //Quiz.QuizController.quit();
                 }
             }, 1000));
         },
         stopTimer: function () {
+		    console.log('stop');
             clearInterval(this.get("updateTimer"));
         }
 	});

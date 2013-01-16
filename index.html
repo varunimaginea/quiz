@@ -26,6 +26,9 @@
             </script>
 
             <script type="text/x-handlebars" data-template-name="quiz-view">
+			   <div class="timerDisplay"> 
+			      {{view Quiz.TimerView controller=this}}
+			   </div>
                {{#view view.questionView contetnBinding=currentQuestion}}
                 {{#if currentQuestion.imageURL}}
                     <img {{bindAttr src="currentQuestion.imageURL" }} />
@@ -33,9 +36,11 @@
                     {{view view.AnswerTextField }}
                 {{else}}
                 <p class="questionText">{{currentQuestion.question}}</p>
+				  {{#with view as questionView}}
                     {{#collection contentBinding="currentQuestion.answers" class="questionOptions" tagName="ul"}}
-                        {{view view.optionsView contentBinding="view.content"}}
+                        {{view questionView.optionsView contentBinding="view.content"}}
                     {{/collection}}
+				   {{/with}}
                 {{/if}}
                {{/view}}
             </script>
@@ -44,8 +49,8 @@
                 <!-- start page -->
                 {{view Quiz.HomeView}}
 
-                <!-- Question page -->
-                {{view Quiz.QuizView}}
+                <!-- Question page 
+                {{view Quiz.QuizView}} -->
 
             </script>
 

@@ -29,7 +29,7 @@
             //App.get('router').transitionTo('root.quiz');
 			console.log("started");
             this.setProperties({
-                'currentIndex': 0,
+                'currentIndex': 1,
                 'currentPage': 'question-page',
                 '[]': Quiz.questions.questions,
                 'timerController': Quiz.TimerController.create({
@@ -39,7 +39,7 @@
                     })
                 })
             });
-            Quiz.quizView.appendTo("#qn");
+            Quiz.quizView.appendTo('#qn');
         },
         next: function () {
             var currentQuestion = this.get('currentQuestion');
@@ -65,12 +65,14 @@
             return (answer && userAnswer && isNaN(answer)) ? Ember.isEqual(userAnswer.toLowerCase(), answer.toLowerCase()) : Ember.isEqual(userAnswer, answer);
         },
         quit: function () {
-            this.timerController.stopTimer();
-        }
+		   if(this.get('timerController').timer.timeLeft === 0) {
+               this.timerController.stopTimer();
+		   }
+        }.observes('timerController.timer.timeLeft')
     });
 
     Quiz.QuizController = QuizController;
     Quiz.quizController = QuizController.create();
-    Quiz.quizView = Quiz.QuizView.create({controller: Quiz.quizController, timerView: Quiz.TimerView.create({controller: Quiz.quizController})});
+    Quiz.quizView = Quiz.QuizView.create({controller: Quiz.quizController});
 
 })(window.Quiz, jQuery);

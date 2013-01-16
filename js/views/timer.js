@@ -7,10 +7,9 @@
         width: 104,
         height: 114,
         controller: null,
-		element: null,
-
+		
         updateTimerCanvas: function () {
-            if (this.get('element') && this.get('element').getContext) {
+		   if (this.get('element') && this.get('element').getContext) {
                 var ctx = this.get('element').getContext('2d');
                 ctx.clearRect(0, 0, 104, 114);
                 ctx.beginPath();
