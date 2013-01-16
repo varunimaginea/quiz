@@ -29,12 +29,12 @@
                {{#view view.questionView contetnBinding=currentQuestion}}
                 {{#if currentQuestion.imageURL}}
                     <img {{bindAttr src="currentQuestion.imageURL" }} />
-                    <p class="questionText">{{view.content.question}}</p>
-                    {{view view.answerTextField }}
+                    <p class="questionText">{{currentQuestion.question}}</p>
+                    {{view view.AnswerTextField }}
                 {{else}}
-                    <p class="questionText">{{view.content.question}}</p>
-                    {{#collection contentBinding="view.content.options" class="questionOptions" tagName="ul"}}
-                        {{view App.RadioView contentBinding="view.content"}}
+                <p class="questionText">{{currentQuestion.question}}</p>
+                    {{#collection contentBinding="currentQuestion.answers" class="questionOptions" tagName="ul"}}
+                        {{view view.optionsView contentBinding="view.content"}}
                     {{/collection}}
                 {{/if}}
                {{/view}}

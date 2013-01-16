@@ -17,7 +17,7 @@
         timerView: null,
         /*Question View Definition*/
         questionView: Ember.View.extend({
-            answerTextField: Ember.TextField.extend({
+            AnswerTextField: Ember.TextField.extend({
                 keyUp: function (event) {
                     this.parentView.controller.set('currentAnswer', this.get('value'));
                 }
