@@ -26,30 +26,33 @@
             </script>
 
             <script type="text/x-handlebars" data-template-name="quiz-view">
-			   <div class="timerDisplay"> 
+			   <div class="timerDisplay">
 			      {{view Quiz.TimerView controller=this}}
 			   </div>
                {{#view view.questionView contetnBinding=currentQuestion}}
                 {{#if currentQuestion.imageURL}}
                     <img {{bindAttr src="currentQuestion.imageURL" }} />
                     <p class="questionText">{{currentQuestion.question}}</p>
-                    {{view view.AnswerTextField }}
+                    {{view view.AnswerTextField valueBinding="view.userAnswer}}
                 {{else}}
                 <p class="questionText">{{currentQuestion.question}}</p>
-				  {{#with view as questionView}}
-                    {{#collection contentBinding="currentQuestion.answers" class="questionOptions" tagName="ul"}}
-                        {{view questionView.optionsView contentBinding="view.content"}}
-                    {{/collection}}
-				   {{/with}}
+				    {{#with view as questionView}}
+                        {{#collection contentBinding="currentQuestion.options" class="questionOptions" tagName="ul"}}
+                            {{view questionView.optionsView contentBinding="view.content"}}
+                        {{/collection}}
+				    {{/with}}
                 {{/if}}
                {{/view}}
+                {{view view.quitButtonView}}
+                {{view view.nextButtonView}}
+                {{view view.passButtonView}}
             </script>
 
             <script type="text/x-handlebars">
                 <!-- start page -->
                 {{view Quiz.HomeView}}
 
-                <!-- Question page 
+                <!-- Question page
                 {{view Quiz.QuizView}} -->
 
             </script>

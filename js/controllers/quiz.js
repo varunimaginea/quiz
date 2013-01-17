@@ -14,14 +14,14 @@
         currentQuestion: function () {
             return this.get('content')[this.get('currentIndex')];
         }.property('currentIndex'),
-        currentAnswer: null,
+        currentAnswer: '',
         assessmentArray: [],
         init: function () {
             var self = this;
-            $.each(Quiz.questions, function (index, value) {
-                var question = Quiz.Question.create({'question': value.question, 'options': value.options, 'weight': value.weight, 'type': value.type, 'imageURL': value.imageURL}),
-                    answer = Quiz.Answer.create({'type': value.type, 'answer': value.answer});
-                self.pushObject(question);
+            $.each(Quiz.questions.questions, function (index, value) {
+                var question = Quiz.Question.create({'question': value.question, 'options': value.answers, 'weight': value.weight, 'type': value.type, 'imageURL': value.imageURL}),
+                    answer = Quiz.Answer.create({'type': value.type, 'answer': value.correctAnswer});
+                self.content.push(question);
                 self.assessmentArray.push(answer);
             });
         },
@@ -29,9 +29,8 @@
             //App.get('router').transitionTo('root.quiz');
 			console.log("started");
             this.setProperties({
-                'currentIndex': 1,
+                'currentIndex': 0,
                 'currentPage': 'question-page',
-                '[]': Quiz.questions.questions,
                 'timerController': Quiz.TimerController.create({
                     'timer' : Quiz.Timer.create({
                         'totalTime': Quiz.questions.time,
@@ -45,13 +44,13 @@
             var currentQuestion = this.get('currentQuestion');
             if (this.evaluateQuestion(currentQuestion)) {
                 this.set('correctAnswersCount', this.get('correctAnswersCount') + 1);
-                this.set('score', this.get('score') + currentQuestion.get('weight'));
+                this.set('score', this.get('score') + this.get('currentQuestion').weight);
             }
             this.pass();
         },
         pass: function () {
             var currentIndex = this.get('currentIndex');
-            this.set('currentAnswer', null);
+            this.set('currentAnswer', '');
             if (currentIndex === this.get('content').length - 1) {
                 this.quit();
             } else {
@@ -65,9 +64,13 @@
             return (answer && userAnswer && isNaN(answer)) ? Ember.isEqual(userAnswer.toLowerCase(), answer.toLowerCase()) : Ember.isEqual(userAnswer, answer);
         },
         quit: function () {
-		   if(this.get('timerController').timer.timeLeft === 0) {
-               this.timerController.stopTimer();
-		   }
+            console.log('Quitting...............');
+            this.timerController.stopTimer();
+        },
+        checkTimer: function () {
+		    if (this.get('timerController').timer.timeLeft === 0) {
+                this.quit();
+		    }
         }.observes('timerController.timer.timeLeft')
     });
 

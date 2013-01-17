@@ -15,10 +15,10 @@
             })
         })
 	});*/
-	
+
 	//window.Quiz.quizRouter = window.Quiz.Router.create();
 	//window.Quiz.initialize(window.Quiz.quizRouter);
-	
+
 	window.Quiz.initialize();
 
     window.Quiz.questions = {
@@ -89,7 +89,7 @@
             type: "radio",
             correctAnswer: 5
         }],
-        time: 5,
+        time: 50,
         //If null, its not a timer base quiz. Value will be in seconds
         randomized: true //If true, the questions will be displayed in random.
     };
