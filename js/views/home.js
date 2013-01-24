@@ -15,7 +15,7 @@
 (function (Quiz) {
     'use strict';
     Quiz.HomeView = Ember.View.extend({
-		userName: "",
+		userName: null,
         templateName: 'home-view',
         isVisible: function () {
             return Quiz.quizController.get("currentPage") === "home-page";
@@ -23,18 +23,8 @@
 		userNameField: Ember.TextField.extend({
             elementId: 'userName'
         }),
-        startButtonView: Ember.View.extend({
-            tagName: 'button',
-            template: Ember.Handlebars.compile('Start'),
-            classNames: ['navBtn'],
-            elementId: 'start-quiz-button',
-            attributeBindings: ['disabled'],
-			disabled: function () {
-                return ((this._parentView.userName.length > 0) ? false : true);
-            }.property('this._parentView.userName'),
-			click: function (event) {
-			    Quiz.quizController.startQuiz();
-			}
-        })
+        isValidUser: function () {
+            return (!this.get('userName'));
+        }.property('userName')
     });
 })(window.Quiz);

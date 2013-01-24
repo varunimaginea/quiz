@@ -9,9 +9,8 @@
     'use strict';
     Quiz.QuizView = Ember.View.extend({
         templateName: 'quiz-view',
-       	isAnswered: function () {
-		    var userAnswer = this.controller ? (this.controller.get('currentAnswer') || '') : ''; 
-		    return (userAnswer + '').length > 0 ? false : true;
+        isAnswered: function () {
+		    return (!this.controller.get('currentAnswer'));
 		}.property('this.controller.currentAnswer'),
         isVisible: function () {
             return Quiz.quizController.get("currentPage") === "question-page";
@@ -21,7 +20,7 @@
         questionView: Ember.View.extend({
             AnswerTextField: Ember.TextField.extend({
 			    keyUp: function (event) {
-                    this._parentView._parentView.set('userAnswer', this.get('value'));
+                    this.bindingContext.set('userAnswer', this.get('value'));
                 }
             }),
             optionsView: Ember.View.extend({
@@ -29,7 +28,7 @@
                 template: Ember.Handlebars.compile('{{view.content}}'),
                 classNameBindings: ['selected'],
                 selected: false,
-                click: function (e) {
+                click: function (event) {
                     this._parentView._parentView.forEachChildView(function (view) {
                         view._childViews[0].set("selected", false);
                     });
@@ -38,26 +37,6 @@
                     this.set("selected", true);
                 }
             })
-        }),
-        quitButtonView: Ember.View.extend({
-            tagName: 'button',
-            template: Ember.Handlebars.compile('Quit'),
-            classNames: ['navBtn'],
-            elementId: 'quit-quiz-button',
-            click: function (event) {
-                this._parentView.controller.quit();
-            }
-        }),
-        passButtonView: Ember.View.extend({
-            tagName: 'button',
-            template: Ember.Handlebars.compile('Pass'),
-            classNames: ['navBtn'],
-            elementId: 'pass-quiz-button',
-            click: function (event) {
-                this._parentView.controller.pass();
-            }
         })
-
-        /*Quiz Controls View Definition*/
     });
 })(window.Quiz);

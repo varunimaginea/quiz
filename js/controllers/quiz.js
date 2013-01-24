@@ -14,7 +14,7 @@
         currentQuestion: function () {
             return this.get('content')[this.get('currentIndex')];
         }.property('currentIndex'),
-        currentAnswer: '',
+        currentAnswer: null,
         assessmentArray: [],
         init: function () {
             var self = this;
@@ -38,7 +38,7 @@
                     })
                 })
             });
-            Quiz.quizView.appendTo('#qn');
+            Quiz.quizView.appendTo('#question-page');
 			this.get("timerController").startTimer();
         },
         next: function () {
@@ -51,7 +51,7 @@
         },
         pass: function () {
             var currentIndex = this.get('currentIndex');
-            this.set('currentAnswer', '');
+            this.set('currentAnswer', null);
             if (currentIndex === this.get('content').length - 1) {
                 this.quit();
             } else {

@@ -20,13 +20,13 @@
                     {{view view.userNameField valueBinding="view.userName"}}
                 </section>
                 <section id="controlSection">
-                    {{view view.startButtonView}}
+                    <button id="start-quiz-button" class="navBtn"  {{bindAttr disabled="view.isValidUser"}} {{action "startQuiz" target="Quiz.quizController"}}>Start</button>
                     <button id="help-button" class="navBtn">Help</button>
                 </section>
             </script>
 
             <script type="text/x-handlebars" data-template-name="quiz-view">
-			 {{#with view as quizView}}
+			    {{#with view as quizView}}
 			   <div class="timerDisplay">
 			      {{view Quiz.TimerView controller=this}}
 			   </div>
@@ -38,15 +38,16 @@
                 {{else}}
                     <p class="questionText">{{currentQuestion.question}}</p>
 				    {{#with view as questionView}}
-                        {{#collection contentBinding="currentQuestion.options" class="questionOptions" tagName="ul"}}
+                        {{#collection id="optionsList" contentBinding="currentQuestion.options" class="questionOptions" tagName="ul"}}
                             {{view questionView.optionsView contentBinding="view.content"}}
                         {{/collection}}
 				    {{/with}}
                 {{/if}}
                {{/view}}
-                {{view view.quitButtonView}}
+
                 <button id="next-quiz-button" class="navBtn"  {{bindAttr disabled="view.isAnswered"}} {{action "next" target="controller"}}>Next</button>
 				<button id="pass-quiz-button" class="navBtn"  {{action "pass" target="controller"}}>Pass</button>
+				<button id="quit-quiz-button" class="navBtn"  {{action "quit" target="controller"}}>Quit</button>
 		    {{/with}}
             </script>
 
@@ -54,12 +55,11 @@
                 <!-- start page -->
                 {{view Quiz.HomeView}}
 
-                <!-- Question page
-                {{view Quiz.QuizView}} -->
-
+                <!--{{#view id="question-page"}}
+                {{/view}}-->
             </script>
 
-            <div id="qn"></div>
+            <div id="question-page"></div>
 	    </section>
 
         <!-- Load google Api jquery first for better performance since it is cached. -->

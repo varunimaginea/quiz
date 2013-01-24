@@ -7,6 +7,10 @@ body {
     background: url('../img/quiz-app_bg_A.jpg') repeat;
 }
 
+p, ul {
+    color: white;
+}
+
 header {
     background: url('../img/quiz-logo_A.png');
     width: 402px;
