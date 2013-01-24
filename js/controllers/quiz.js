@@ -39,6 +39,7 @@
                 })
             });
             Quiz.quizView.appendTo('#qn');
+			this.get("timerController").startTimer();
         },
         next: function () {
             var currentQuestion = this.get('currentQuestion');

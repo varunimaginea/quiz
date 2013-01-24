@@ -9,16 +9,19 @@
     'use strict';
     Quiz.QuizView = Ember.View.extend({
         templateName: 'quiz-view',
-        userAnswer: '',
+       	isAnswered: function () {
+		    var userAnswer = this.controller ? (this.controller.get('currentAnswer') || '') : ''; 
+		    return (userAnswer + '').length > 0 ? false : true;
+		}.property('this.controller.currentAnswer'),
         isVisible: function () {
             return Quiz.quizController.get("currentPage") === "question-page";
         }.property('Quiz.quizController.currentPage'),
         controller: null,
-        /*Question View Definition*/
+		/*Question View Definition*/
         questionView: Ember.View.extend({
             AnswerTextField: Ember.TextField.extend({
-                keyUp: function (event) {
-                    this.bindingContext.set('currentAnswer', this.get('value'));
+			    keyUp: function (event) {
+                    this._parentView._parentView.set('userAnswer', this.get('value'));
                 }
             }),
             optionsView: Ember.View.extend({
@@ -43,19 +46,6 @@
             elementId: 'quit-quiz-button',
             click: function (event) {
                 this._parentView.controller.quit();
-            }
-        }),
-        nextButtonView: Ember.View.extend({
-            tagName: 'button',
-            template: Ember.Handlebars.compile('Next'),
-            classNames: ['navBtn'],
-            elementId: 'next-quiz-button',
-            attributeBindings: ['disabled'],
-            disabled: function () {
-                return ((this._parentView.userAnswer.length > 0) ? false : true);
-            }.property('this._parentView.userAnswer'),
-            click: function (event) {
-                this._parentView.controller.next();
             }
         }),
         passButtonView: Ember.View.extend({
